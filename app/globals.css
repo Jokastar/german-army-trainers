@@ -2,22 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "FavoritBookC";
+  src: url("/fonts/FavoritBookC.woff2") format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family:"TestSohne-Kraftig";
+  src: url("/fonts/TestSoehne-Kraeftig.otf") format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:"TestSohneMono-Buch";
+  src: url("/fonts/TestSoehneMono-Buch.otf") format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:"Tiposka";
+  src: url("/fonts/Tiposka.otf") format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --green:#66FFAD;
+  --light-gray:#DCDCDC;
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("/images/background-image.svg");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "FavoritBookC", Arial, Helvetica, sans-serif;
+  color: var(--light-gray);
+}
+.img-shoes-ctn{
+  background-image: url("/images/shoes.svg");
+  background-position: "top center";
+  background-repeat: no-repeat;
 }
 
 @layer utilities {

@@ -8,10 +8,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        green:"var(--green)",
+        lightgray:"var(--light-gray)"
       },
+      fontFamily:{
+        FavoritBookC:["FavoritBookC", "sans-serif"], 
+        TestSohneKraftig:["TestSohne-Kraftig", "sans-serif"],
+        TestSohneMonoBuch:["TestSohneMono-Buch", "sans-serif"],
+        Tiposka:["Tiposka", "sans-serif"]
+      },
+      
     },
   },
-  plugins: [],
+  plugins: []
 };
