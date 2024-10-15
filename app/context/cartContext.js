@@ -1,3 +1,5 @@
+"use client"; 
+
 import React, { createContext, useContext, useState } from 'react';
 
 // Create the Cart context
@@ -5,29 +7,29 @@ const CartContext = createContext();
 
 // Cart Provider
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([{product:"german army trainers", quantity:2}]);
 
-  // Add sneaker to cart (increase quantity if it already exists)
-  const addToCart = (sneaker) => {
-    const existingSneaker = cart.find(item => item.id === sneaker.id);
-    if (existingSneaker) {
+  // Add product to cart (increase quantity if it already exists)
+  const addToCart = (product) => {
+    const existingProduct = cart.find(item => item.id === product.id);
+    if (existingProduct) {
       setCart(cart.map(item => 
-        item.id === sneaker.id 
+        item.id === product.id 
           ? { ...item, quantity: item.quantity + 1 }
           : item
       ));
     } else {
-      setCart([...cart, { ...sneaker, quantity: 1 }]);
+      setCart([...cart, { ...product, quantity: 1 }]);
     }
   };
 
-  // Remove sneaker from cart if it exists
+  // Remove product from cart if it exists
   const removeFromCart = (id) => {
-    const existingSneaker = cart.find(item => item.id === id);
-    if (existingSneaker) {
+    const existingproduct = cart.find(item => item.id === id);
+    if (existingproduct) {
       setCart(cart.filter(item => item.id !== id));
     } else {
-      console.log("Sneaker not in cart");
+      console.log("product not in cart");
     }
   };
 
