@@ -33,6 +33,7 @@ function Header() {
   };
 
   return (
+    <>
     <header className='flex justify-between text-white font-TestSohneMonoBuch uppercase text-xs fixed top-0 left-0 right-0 z-10'>
       <div className='header-left w-[150px] flex justify-between'>
         <Link href="/pages/aboutus">about us</Link>
@@ -57,6 +58,8 @@ function Header() {
         <Cart />
       </div>
     </header>
+    <div className=' white-space h-[100px]'></div>
+    </>
   );
 }
 

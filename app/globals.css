@@ -43,6 +43,9 @@ body {
   background-size: cover;
   font-family: "FavoritBookC", Arial, Helvetica, sans-serif;
   color: var(--light-gray);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 .img-shoes-ctn{
   background-image: url("/images/shoes.svg");
