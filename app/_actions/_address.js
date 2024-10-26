@@ -5,7 +5,7 @@ import { addressFormSchema } from "@/app/schemas/addressSchema";
 
 // CREATE an Address
 export async function createAddress(formData) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Validate the form data
   const result = addressFormSchema.safeParse({
@@ -13,7 +13,7 @@ export async function createAddress(formData) {
     city: formData.city,
     postcode: formData.postcode,
     country: formData.country,
-    user_id: BigInt(formData.user_id),
+    user_id: formData.user_id
   });
 
   if (!result.success) {
@@ -22,14 +22,14 @@ export async function createAddress(formData) {
   }
 
   // Insert into the Address table
-  const { data, error } = await supabase.from("Address").insert([result.data]);
+  const {data, error} = await supabase.from("Address").insert(result.data).select();
 
   if (error) {
     console.log("Supabase error: " + JSON.stringify(error));
     return { data: null, error: error.message, success: false };
   }
-
-  return { data, error: null, success: true };
+   
+  return { data:data[0], success: true };
 }
 
 // READ an Address by ID

@@ -58,7 +58,6 @@ function Header() {
         <Cart />
       </div>
     </header>
-    <div className=' white-space h-[100px]'></div>
     </>
   );
 }

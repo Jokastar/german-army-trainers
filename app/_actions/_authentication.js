@@ -4,7 +4,7 @@ import {signUpFormSchema, loginFormSchema} from "../schemas/authenticationSchema
 import { revalidatePath } from 'next/cache'
 
 export async function signup(formData) {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     // Validate the form data
     const result = signUpFormSchema.safeParse({
@@ -50,7 +50,7 @@ export async function signup(formData) {
 
 
 export async function login(formData) {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     // Validate the form data
     const result = loginFormSchema.safeParse({
@@ -77,6 +77,16 @@ export async function login(formData) {
         console.log("user is logged in " + JSON.stringify(data.user)); 
         return { data:"user is logged in and " + data.user.role, error: null, success: true };
     }
+}
+
+export async function getUser(){
+    const supabase = await createClient(); 
+
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if(user){
+        return {user, error:null}
+    }
+    return {user:null, error:error}
 }
 
 

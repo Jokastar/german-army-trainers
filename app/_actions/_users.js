@@ -1,9 +1,11 @@
-import { createClient } from "@/utils/supabaseClient";
+"use server"
+
+import { createClient } from "@/utils/supabase/server";
 import { userFormSchema } from "@/app/schemas/userSchema";
 
 // CREATE user
 export async function createUser(formData) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Validate form data using Zod
   const result = userFormSchema.safeParse({
@@ -43,7 +45,7 @@ export async function createUser(formData) {
 
 // READ user by ID
 export async function getUserById(id) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("Users")
@@ -61,7 +63,7 @@ export async function getUserById(id) {
 
 // UPDATE user
 export async function updateUser(id, formData) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Validate form data
   const result = userFormSchema.safeParse({
@@ -101,7 +103,7 @@ export async function updateUser(id, formData) {
 
 // DELETE user
 export async function deleteUser(id) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("Users")
@@ -114,4 +116,21 @@ export async function deleteUser(id) {
   }
 
   return { data, error: null, success: true };
+}
+
+export async function getUserByEmail(email) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('Users')
+    .select('*')
+    .eq('email', email)
+    .single(); // We assume email is unique
+
+  if (error) {
+    console.log('Supabase error:', error.message);
+    return { data: null, error: error.message };
+  }
+
+  return { data, error: null };
 }

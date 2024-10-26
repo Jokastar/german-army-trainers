@@ -13,7 +13,7 @@ const uploadcareSimpleAuthSchema = {
 
 // Fetch all products
 export const fetchProducts = async () => {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data, error } = await supabase.from('Products').select();
   if (error) {
     console.error('Error fetching products:', error);
@@ -84,7 +84,7 @@ const deleteFileFromUploadcare = async (uuid) => {
 };
 
 export const deleteProduct = async (id) => {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Step 1: Retrieve the product to get its associated images and thumbnail
   const { data: product, error: fetchError } = await supabase
@@ -147,7 +147,7 @@ export const deleteProduct = async (id) => {
 
 
 export async function getProductById(id) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Fetch product by ID
   const { data, error } = await supabase
@@ -157,7 +157,7 @@ export async function getProductById(id) {
     .single(); // Ensure only one record is returned
 
   if (error) {
-    console.error("Error fetching product:", error.message);
+    console.log("Error fetching product: " + error.message);
     return { data: null, error: error.message };
   }
 

@@ -37,7 +37,7 @@ function Login() {
             <input id='password' {...register("password")} className='w-full border-b border-lightgray bg-transparent outline-none' type='password'></input>
             {errors.password && <p className='text-red-600'>{errors.password.message}</p>}
           </div>
-          <p>No account ? <Link href={"/pages/signin"} className='text-[#6A70FF]'>Sign in </Link></p>
+          <p>No account ? <Link href={"/pages/signup"} className='text-[#6A70FF]'>Sign in </Link></p>
           <button type='submit' className='h-[35px] uppercase bg-green text-white w-full text-md'>Login</button>
           {error && <p className='text-red-600'>{error}</p>}
         </form>

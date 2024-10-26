@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import React, { createContext, useContext, useState } from 'react';
 
@@ -7,7 +7,7 @@ const CartContext = createContext();
 
 // Cart Provider
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([{product:"german army trainers", quantity:2}]);
+  const [cart, setCart] = useState([]);
 
   // Add product to cart (increase quantity if it already exists)
   const addToCart = (product) => {
@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
     if (existingproduct) {
       setCart(cart.filter(item => item.id !== id));
     } else {
-      console.log("product not in cart");
+      console.log("Product not in cart");
     }
   };
 
@@ -38,9 +38,16 @@ export const CartProvider = ({ children }) => {
     setCart([]);
   };
 
+  // Get the total price of all items in the cart
+  const getTotal = () => {
+    return cart.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
+  };
+
   // Cart data and actions available throughout the app
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, getTotal }}>
       {children}
     </CartContext.Provider>
   );
@@ -48,3 +55,4 @@ export const CartProvider = ({ children }) => {
 
 // Custom hook to use the CartContext
 export const useCart = () => useContext(CartContext);
+
